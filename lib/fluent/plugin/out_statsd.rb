@@ -37,8 +37,8 @@ module Fluent
           case statsd_type
           when 'timing'
             @statsd.timing record['statsd_key'], record['statsd_timing'].to_f
-          when 'guage'
-            @statsd.guage record['statsd_key'], record['statsd_gauge'].to_f
+          when 'gauge'
+            @statsd.gauge record['statsd_key'], record['statsd_gauge'].to_f
           when 'increment'
             @statsd.increment record['statsd_key']
           end
