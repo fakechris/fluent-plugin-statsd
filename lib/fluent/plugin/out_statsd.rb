@@ -39,8 +39,14 @@ module Fluent
             @statsd.timing record['statsd_key'], record['statsd_timing'].to_f
           when 'gauge'
             @statsd.gauge record['statsd_key'], record['statsd_gauge'].to_f
+          when 'count'
+            @statsd.count record['statsd_key'], record['statsd_count'].to_f
+          when 'set'
+            @statsd.set record['statsd_key'], record['statsd_set']
           when 'increment'
             @statsd.increment record['statsd_key']
+          when 'decrement'
+            @statsd.decrement record['statsd_key']
           end
         end
       }
