@@ -16,6 +16,27 @@ $ fluent-gem install fluent-plugin-statsd
 </match>
 ```
 
+```ruby
+fluent_logger.post('statsd',
+  :statsd_type => 'timing',
+  :statsd_key => 'org.foo.timing',
+  :statsd_timing => 0.234
+)
+
+fluent_logger.post('statsd',
+  :statsd_type => 'gauge',
+  :statsd_gauge => 10,
+  :statsd_key => 'org.foo.gauge'
+)
+
+fluent_logger.post('statsd',
+  :statsd_type => 'increment',
+  :statsd_key => 'org.foo.counter'
+)
+
+```
+
+
 # Copyright
 
 Copyright (c) 2014- Chris Song
