@@ -53,6 +53,29 @@ fluent_logger.post('statsd',
 )
 ```
 
+# worked with record_reformer to transform access log request_time into statsd
+
+```
+<match accesslog.reformer>
+  type copy
+  <store>
+    type statsd
+    host 127.0.0.1
+    port 8125
+    flush_interval 1s 
+  </store>
+  # other stores...
+</match>
+<match accesslog>
+  type record_reformer
+  output_tag ${tag}.reformer
+  # transform /url1/url2/url3 --> url.urlNN.urlNN
+  statsd_key ${"url"+request_uri.gsub(/((\/[^\/]+){2}).*/, '\1').gsub(/([^\?]*)\?.*/,'\1').gsub(/[0-9]+/, "NN").gsub(/\//, ".");}
+  statsd_timing ${request_time}
+  statsd_type ${"timing"}
+</match>
+```
+
 
 # Copyright
 
