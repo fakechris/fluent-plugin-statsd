@@ -53,7 +53,9 @@ fluent_logger.post('statsd',
 )
 ```
 
-# worked with record_reformer to transform access log request_time into statsd
+# td-agent.conf demo
+
+worked with record_reformer to transform access log request_time into statsd
 
 ```
 <match accesslog.reformer>
