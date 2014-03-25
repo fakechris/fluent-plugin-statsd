@@ -6,6 +6,8 @@
 $ fluent-gem install fluent-plugin-statsd
 ```
 
+[![Gem Version](https://badge.fury.io/rb/fluent-plugin-statsd.png)](http://badge.fury.io/rb/fluent-plugin-statsd)
+
 # Usage
 
 ```
