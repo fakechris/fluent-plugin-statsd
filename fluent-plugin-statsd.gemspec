@@ -3,7 +3,7 @@ $:.push File.expand_path('../lib', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name        = "fluent-plugin-statsd"
-  gem.description = "fluentd statsd plugin"
+  gem.description = "fluentd output filter plugin to send metrics to Esty StatsD"
   gem.homepage    = "https://github.com/fakechris/fluent-plugin-statsd"
   gem.summary     = gem.description
   gem.version     = File.read("VERSION").strip
