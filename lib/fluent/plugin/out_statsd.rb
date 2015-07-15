@@ -7,6 +7,7 @@ module Fluent
     config_param :flush_interval, :time, :default => 1
     config_param :host, :string, :default => 'localhost'
     config_param :port, :string, :default => '8125'
+    config_param :batch_send, :bool, :default => false
 
     attr_reader :statsd
 
@@ -16,7 +17,8 @@ module Fluent
 
     def configure(conf)
       super
-      @statsd = Statsd.new(host, port)
+      statsd = Statsd.new(host, port)
+      @statsd = batch_send ? Statsd::Batch.new(statsd) : statsd
     end
 
     def start
@@ -50,6 +52,7 @@ module Fluent
           end
         end
       }
+      @statsd.flush if batch_send
     end
 
   end

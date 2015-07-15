@@ -15,6 +15,7 @@ $ fluent-gem install fluent-plugin-statsd
   type statsd
   host localhost # optional
   port 8125# optional
+  batch_send true # optional
 </match>
 ```
 
