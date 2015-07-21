@@ -8,6 +8,7 @@ module Fluent
     config_param :host, :string, :default => 'localhost'
     config_param :port, :string, :default => '8125'
     config_param :batch_send, :bool, :default => false
+    config_param :namespace, :string, :default => nil
 
     attr_reader :statsd
 
@@ -18,6 +19,7 @@ module Fluent
     def configure(conf)
       super
       statsd = Statsd.new(host, port)
+      statsd.namespace = namespace if namespace
       @statsd = batch_send ? Statsd::Batch.new(statsd) : statsd
     end
 
