@@ -25,7 +25,8 @@ module Fluent
 
     def configure(conf)
       super
-      @statsd = Statsd.new(host, port) {|sd| std.namespace = namespace if namespace }
+      @statsd = Statsd.new(host, port)
+      @statsd.namespace = namespace if namespace
       log.info(statsd)
 
       @metrics = conf.elements.select {|elem| elem.name == 'metric' }
