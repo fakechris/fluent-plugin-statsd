@@ -33,7 +33,7 @@ $ fluent-gem install fluent-plugin-statsd
 # Development
 
 ```
-$ rake test
+$ rspec
 ```
 
 # Copyright
