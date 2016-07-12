@@ -18,5 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "fluentd", ">= 0.10.8"
 
   gem.add_development_dependency "rake", ">= 0.9.2"
+  gem.add_development_dependency "test-unit"
   gem.add_development_dependency "statsd-ruby", ">=1.2.1"
+  gem.add_development_dependency "pry"
 end
