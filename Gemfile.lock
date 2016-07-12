@@ -9,6 +9,7 @@ GEM
   specs:
     coderay (1.1.1)
     cool.io (1.4.4)
+    diff-lcs (1.2.5)
     fluentd (0.14.1)
       cool.io (>= 1.4.3, < 2.0.0)
       http_parser.rb (>= 0.5.1, < 0.7.0)
@@ -29,7 +30,19 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    rake (11.1.2)
+    rspec (3.5.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
+    rspec-core (3.5.1)
+      rspec-support (~> 3.5.0)
+    rspec-expectations (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-mocks (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-support (3.5.0)
     serverengine (1.6.4)
       sigdump (~> 0.2.2)
     sigdump (0.2.4)
@@ -51,7 +64,7 @@ PLATFORMS
 DEPENDENCIES
   fluent-plugin-statsd!
   pry
-  rake (>= 0.9.2)
+  rspec (~> 3.0)
   statsd-ruby
   test-unit
 
