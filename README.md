@@ -3,7 +3,7 @@
 # Installation
 
 ```
-$ fluent-gem install fluent-plugin-statsd
+$ fluent-gem install fluent-plugin-statsd-output
 ```
 
 [![Gem Version](https://badge.fury.io/rb/fluent-plugin-statsd.png)](http://badge.fury.io/rb/fluent-plugin-statsd)
