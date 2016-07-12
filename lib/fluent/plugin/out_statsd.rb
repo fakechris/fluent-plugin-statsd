@@ -26,7 +26,10 @@ module Fluent
     def configure(conf)
       super
       @statsd = Statsd.new(host, port) {|sd| std.namespace = namespace if namespace }
+      log.info(statsd)
+
       @metrics = conf.elements.select {|elem| elem.name == 'metric' }
+      log.info(@metrics)
     end
 
     def start
@@ -56,6 +59,8 @@ module Fluent
     private
 
     def send_to_statsd(type, key, val)
+      log.debug([type, key, val])
+
       case type
       when 'timing'
         @statsd.timing key, val.to_f
@@ -69,6 +74,8 @@ module Fluent
         @statsd.increment key
       when 'decrement'
         @statsd.decrement key
+      else
+        raise "Invalid statsd type '#{type}'"
       end
     end
 
