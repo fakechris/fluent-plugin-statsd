@@ -16,9 +16,9 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_dependency "fluentd", ">= 0.10.8"
+  gem.add_dependency "statsd-ruby", "~> 1.3.0"
 
   gem.add_development_dependency "rspec", '~> 3.0'
   gem.add_development_dependency "test-unit"
-  gem.add_development_dependency "statsd-ruby", ">=1.2.1"
   gem.add_development_dependency "pry"
 end
