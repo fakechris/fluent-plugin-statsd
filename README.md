@@ -24,8 +24,8 @@ $ fluent-gem install fluent-plugin-statsd-output
   </metric>
 
   <metric>
-    statsd_type incrument
-    statsd_key my_app.nginx.${response_code.to_i / 100}xx # 2xx 4xx 5xx
+    statsd_type increment
+    statsd_key my_app.nginx.${record['response_code'].to_i / 100}xx # 2xx 4xx 5xx
   </metric>
 </match>
 ```
