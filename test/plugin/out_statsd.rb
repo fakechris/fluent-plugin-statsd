@@ -1,4 +1,5 @@
 require 'fluent/plugin/out_statsd'
+require 'fluent/test'
 require 'statsd-ruby'
 
 class StatsdOutputTest < Test::Unit::TestCase
