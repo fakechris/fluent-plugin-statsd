@@ -6,6 +6,7 @@ RSpec.describe Fluent::StatsdOutput do
     %{
       type statsd
       namespace a.b.c
+      batch_byte_size 512
 
       <metric>
         statsd_type timing
@@ -20,7 +21,13 @@ RSpec.describe Fluent::StatsdOutput do
     }
   end
   let(:driver) { create_driver(config) }
-  let(:statsd) { double('statsd', increment: true, timing: true, 'namespace=' => true) }
+  let(:statsd) { double('statsd', increment: true,
+                                  timing: true,
+                                  'namespace=' => true,
+                                  'batch_size=' => true,
+                                  'batch_byte_size' => true)
+
+               }
   let(:time) { Time.now.utc }
 
   before :all do
@@ -41,6 +48,8 @@ RSpec.describe Fluent::StatsdOutput do
     allow(Statsd).to receive(:new).and_return(statsd)
 
     expect(statsd).to receive(:namespace=).with('a.b.c')
+    expect(statsd).to receive(:batch_size=).with(nil)
+    expect(statsd).to receive(:batch_byte_size=).with(512)
 
     expect(statsd).to receive(:increment).with('res_code_2xx').twice.times
     expect(statsd).to receive(:increment).with('res_code_4xx').once.times

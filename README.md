@@ -16,6 +16,7 @@ $ fluent-gem install fluent-plugin-statsd-output
   host localhost # optional
   port 8125 # optional
   namespace a.b.c # optional
+  batch_byte_size 512 # optional
 
   <metric>
     statsd_type timing
