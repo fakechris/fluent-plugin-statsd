@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fluent-plugin-statsd-output (1.1.1)
+    fluent-plugin-statsd-output (1.2.0)
       fluentd (>= 0.10.8)
       statsd-ruby (~> 1.4)
 
@@ -68,4 +68,4 @@ DEPENDENCIES
   test-unit
 
 BUNDLED WITH
-   1.13.6
+   1.14.6
