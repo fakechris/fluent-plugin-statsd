@@ -10,6 +10,7 @@ module Fluent
     config_param :host, :string, :default => 'localhost'
     config_param :port, :string, :default => '8125'
     config_param :namespace, :string, :default => nil
+    config_param :batch_byte_size, :integer, :default => nil
 
     config_section :metric do
       config_param :statsd_type, :string
@@ -27,6 +28,11 @@ module Fluent
       super
       @statsd = Statsd.new(host, port)
       @statsd.namespace = namespace if namespace
+
+      if batch_byte_size
+        @statsd.batch_size = nil
+        @statsd.batch_byte_size = batch_byte_size
+      end
       log.info(statsd)
 
       @metrics = conf.elements.select {|elem| elem.name == 'metric' }
