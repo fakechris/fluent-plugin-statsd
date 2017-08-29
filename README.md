@@ -1,5 +1,7 @@
 # Fluent event to statsd plugin.
 
+[![Build Status](https://travis-ci.org/lingochamp/fluent-plugin-statsd.svg?branch=master)](https://travis-ci.org/lingochamp/fluent-plugin-statsd)
+
 # Installation
 
 ```
