@@ -1,3 +1,0 @@
-example_id                            | status | run_time        |
-------------------------------------- | ------ | --------------- |
-./spec/plugin/out_statsd_spec.rb[1:1] | passed | 0.54067 seconds |
