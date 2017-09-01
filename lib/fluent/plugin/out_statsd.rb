@@ -45,6 +45,7 @@ module Fluent
 
     def shutdown
       super
+      @statsd.flush
     end
 
     def format(tag, time, record)
