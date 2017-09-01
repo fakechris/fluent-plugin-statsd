@@ -23,6 +23,7 @@ RSpec.describe Fluent::StatsdOutput do
   let(:driver) { create_driver(config) }
   let(:statsd) { double('statsd', increment: true,
                                   timing: true,
+                                  flush: true,
                                   'namespace=' => true,
                                   'batch_size=' => true,
                                   'batch_byte_size' => true)
