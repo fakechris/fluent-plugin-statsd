@@ -26,7 +26,7 @@ module Fluent
 
     def configure(conf)
       super
-      @statsd = Statsd.new(host, port)
+      @statsd = Statsd::Batch.new(Statsd.new(host, port))
       @statsd.namespace = namespace if namespace
 
       if batch_byte_size
@@ -45,6 +45,7 @@ module Fluent
 
     def shutdown
       super
+      @statsd.flush
     end
 
     def format(tag, time, record)
@@ -60,6 +61,7 @@ module Fluent
           send_to_statsd(*metric.values_at(*arg_names).map {|str| parser.parse(str) })
         end
       end
+      @statsd.flush
     end
 
 
