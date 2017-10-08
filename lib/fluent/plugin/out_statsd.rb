@@ -95,7 +95,7 @@ module Fluent
 
       def parse(string)
         return unless string
-        string.gsub(/\$\{.+\}/) {|str| @obj.instance_eval str[2..-2] }
+        string.gsub(/\$\{[^\}]+\}/) {|str| @obj.instance_eval str[2..-2] }
       end
     end
   end
