@@ -1,14 +1,13 @@
 # Fluent event to statsd plugin.
 
 [![Build Status](https://travis-ci.org/lingochamp/fluent-plugin-statsd.svg?branch=master)](https://travis-ci.org/lingochamp/fluent-plugin-statsd)
+[![Gem Version](https://badge.fury.io/rb/fluent-plugin-statsd-output.svg)](https://badge.fury.io/rb/fluent-plugin-statsd-output)
 
 # Installation
 
 ```
 $ fluent-gem install fluent-plugin-statsd-output
 ```
-
-[![Gem Version](https://badge.fury.io/rb/fluent-plugin-statsd.png)](http://badge.fury.io/rb/fluent-plugin-statsd)
 
 # Usage
 
