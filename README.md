@@ -22,7 +22,7 @@ $ fluent-gem install fluent-plugin-statsd-output
   <metric>
     statsd_type timing
     statsd_key my_app.nginx.response_time
-    statsd_key ${record['response_time']}
+    statsd_val ${record['response_time']}
   </metric>
 
   <metric>
