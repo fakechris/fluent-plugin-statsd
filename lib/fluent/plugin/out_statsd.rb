@@ -1,4 +1,5 @@
 require 'statsd-ruby'
+require 'fluent/output'
 
 module Fluent
   class StatsdOutput < BufferedOutput
