@@ -33,14 +33,14 @@ fluent_logger.post('statsd',
 
 fluent_logger.post('statsd',
   :statsd_type => 'count',
-  :statsd_gauge => 10,
-  :statsd_key => 'org.foo.gauge'
+  :statsd_count => 10,
+  :statsd_key => 'org.foo.count'
 )
 
 fluent_logger.post('statsd',
   :statsd_type => 'set',
-  :statsd_gauge => 10,
-  :statsd_key => 'org.foo.gauge'
+  :statsd_set => 10,
+  :statsd_key => 'org.foo.set'
 )
 
 fluent_logger.post('statsd',
