@@ -1,13 +1,21 @@
 require 'statsd-ruby'
-require 'fluent/output'
+require 'fluent/plugin/output'
 
-module Fluent
-  class StatsdOutput < BufferedOutput
+module Fluent::Plugin
+  class StatsdOutput < Output
     Fluent::Plugin.register_output('statsd', self)
+
+    DEFAULT_BUFFER_TYPE = "memory"
+
+    helpers :compat_parameters
 
     config_param :flush_interval, :time, :default => 1
     config_param :host, :string, :default => 'localhost'
     config_param :port, :string, :default => '8125'
+
+    config_section :buffer do
+      config_set_default :@type, DEFAULT_BUFFER_TYPE
+    end
 
     attr_reader :statsd
 
@@ -16,6 +24,7 @@ module Fluent
     end
 
     def configure(conf)
+      compat_parameters_convert(conf, :buffer)
       super
       @statsd = Statsd.new(host, port)
     end
@@ -30,6 +39,14 @@ module Fluent
 
     def format(tag, time, record)
       record.to_msgpack
+    end
+
+    def multi_workers_ready?
+      true
+    end
+
+    def formatted_to_msgpack_binary?
+      true
     end
 
     def write(chunk)
