@@ -12,11 +12,7 @@ RSpec.describe Fluent::StatsdOutput do
         statsd_type timing
         statsd_key res_time
         statsd_val ${record['response_time']}
-      </metric>
-
-      <metric>
-        statsd_type increment
-        statsd_key res_code_${record['status'].to_i / 100}xx
+        statsd_rate 0.4
       </metric>
     }
   end
@@ -52,13 +48,10 @@ RSpec.describe Fluent::StatsdOutput do
     expect(statsd).to receive(:batch_size=).with(nil)
     expect(statsd).to receive(:batch_byte_size=).with(512)
 
-    expect(statsd).to receive(:increment).with('res_code_2xx', sample_rate: 1.0).twice.times
-    expect(statsd).to receive(:increment).with('res_code_4xx', sample_rate: 1.0).once.times
-    expect(statsd).to receive(:increment).with('res_code_5xx', sample_rate: 1.0).once.times
-    expect(statsd).to receive(:timing).with('res_time', 102, sample_rate: 1.0).ordered
-    expect(statsd).to receive(:timing).with('res_time', 105, sample_rate: 1.0).ordered
-    expect(statsd).to receive(:timing).with('res_time', 112, sample_rate: 1.0).ordered
-    expect(statsd).to receive(:timing).with('res_time', 125, sample_rate: 1.0).ordered
+    expect(statsd).to receive(:timing).with('res_time', 102, sample_rate: 0.4).ordered
+    expect(statsd).to receive(:timing).with('res_time', 105, sample_rate: 0.4).ordered
+    expect(statsd).to receive(:timing).with('res_time', 112, sample_rate: 0.4).ordered
+    expect(statsd).to receive(:timing).with('res_time', 125, sample_rate: 0.4).ordered
 
     emit_events([
       {'response_time' => 102, 'status' => '200'},
