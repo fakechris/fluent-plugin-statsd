@@ -15,6 +15,7 @@ $ fluent-gem install fluent-plugin-statsd
   type statsd
   host localhost # optional
   port 8125# optional
+  sample_rate 0.9 # optional
 </match>
 ```
 
@@ -22,36 +23,42 @@ $ fluent-gem install fluent-plugin-statsd
 fluent_logger.post('statsd',
   :statsd_type => 'timing',
   :statsd_key => 'org.foo.timing',
-  :statsd_timing => 0.234
+  :statsd_timing => 0.234,
+  :statsd_rate => 0.8 # Optional
 )
 
 fluent_logger.post('statsd',
   :statsd_type => 'gauge',
   :statsd_gauge => 10,
-  :statsd_key => 'org.foo.gauge'
+  :statsd_key => 'org.foo.gauge',
+  :statsd_rate => 0.2 # Optional
 )
 
 fluent_logger.post('statsd',
   :statsd_type => 'count',
   :statsd_gauge => 10,
-  :statsd_key => 'org.foo.gauge'
+  :statsd_key => 'org.foo.gauge',
+  :statsd_rate => 1 # Optional
 )
 
 fluent_logger.post('statsd',
   :statsd_type => 'set',
   :statsd_gauge => 10,
-  :statsd_key => 'org.foo.gauge'
+  :statsd_key => 'org.foo.gauge',
+  :statsd_rate => 0.3 # Optional
 )
 
 fluent_logger.post('statsd',
   :statsd_type => 'increment',
-  :statsd_key => 'org.foo.counter'
+  :statsd_key => 'org.foo.counter',
+  :statsd_rate => 0.1 # Optional
 )
 
 
 fluent_logger.post('statsd',
   :statsd_type => 'decrement',
-  :statsd_key => 'org.foo.counter'
+  :statsd_key => 'org.foo.counter',
+  :statsd_rate => 0.6 # Optional
 )
 ```
 
@@ -77,6 +84,7 @@ worked with record_reformer to transform access log request_time into statsd
   statsd_key ${"url"+request_uri.gsub(/((\/[^\/]+){2}).*/, '\1').gsub(/([^\?]*)\?.*/,'\1').gsub(/[0-9]+/, "NN").gsub(/\//, ".");}
   statsd_timing ${request_time}
   statsd_type ${"timing"}
+  statsd_rate 0.1
 </match>
 ```
 
