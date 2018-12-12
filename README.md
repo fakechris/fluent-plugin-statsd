@@ -18,11 +18,13 @@ $ fluent-gem install fluent-plugin-statsd-output
   port 8125 # optional
   namespace a.b.c # optional
   batch_byte_size 512 # optional
+  sample_rate 0.9 # optional
 
   <metric>
     statsd_type timing
     statsd_key my_app.nginx.response_time
     statsd_val ${record['response_time']}
+    statsd_rate 0.6 # optional
   </metric>
 
   <metric>
