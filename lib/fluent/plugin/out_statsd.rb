@@ -11,11 +11,13 @@ module Fluent
     config_param :port, :string, :default => '8125'
     config_param :namespace, :string, :default => nil
     config_param :batch_byte_size, :integer, :default => nil
+    config_param :sample_rate, :float, :default => 1.0
 
     config_section :metric do
       config_param :statsd_type, :string
       config_param :statsd_key, :string
       config_param :statsd_val, :string, default: nil
+      config_param :statsd_rate, :float, default: 1.0
     end
 
     attr_reader :statsd
@@ -57,7 +59,7 @@ module Fluent
         parser = RubyStringParser.new(record: record, tag: tag)
 
         @metrics.each do |metric|
-          arg_names = %w{statsd_type statsd_key statsd_val}
+          arg_names = %w{statsd_type statsd_key statsd_val statsd_rate}
           send_to_statsd(*metric.values_at(*arg_names).map {|str| parser.parse(str) })
         end
       end
@@ -67,22 +69,24 @@ module Fluent
 
     private
 
-    def send_to_statsd(type, key, val)
-      log.debug([type, key, val])
+    def send_to_statsd(type, key, val, rate)
+      log.debug([type, key, val, rate])
+
+      rate = sample_rate if rate.nil?
 
       case type
       when 'timing'
-        @statsd.timing key, val.to_f
+        @statsd.timing key, val.to_f, sample_rate: rate.to_f
       when 'gauge'
-        @statsd.gauge key, val.to_f
+        @statsd.gauge key, val.to_f, sample_rate: rate.to_f
       when 'count'
-        @statsd.count key, val.to_f
+        @statsd.count key, val.to_f, sample_rate: rate.to_f
       when 'set'
-        @statsd.set key, val
+        @statsd.set key, val, sample_rate: rate.to_f
       when 'increment'
-        @statsd.increment key
+        @statsd.increment key, sample_rate: rate.to_f
       when 'decrement'
-        @statsd.decrement key
+        @statsd.decrement key, sample_rate: rate.to_f
       else
         raise "Invalid statsd type '#{type}'"
       end

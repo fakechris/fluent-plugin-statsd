@@ -39,9 +39,9 @@ RSpec.describe Fluent::StatsdOutput do
   it 'should call statsd with events data and correctly handle multiple placeholders' do
     allow(Statsd).to receive(:new).and_return(statsd)
 
-    expect(statsd).to receive(:increment).with('res_code_localhost_2xx').twice.times
-    expect(statsd).to receive(:increment).with('res_code_localhost_4xx').once.times
-    expect(statsd).to receive(:increment).with('res_code_localhost_5xx').once.times
+    expect(statsd).to receive(:increment).with('res_code_localhost_2xx', sample_rate: 1.0).twice.times
+    expect(statsd).to receive(:increment).with('res_code_localhost_4xx', sample_rate: 1.0).once.times
+    expect(statsd).to receive(:increment).with('res_code_localhost_5xx', sample_rate: 1.0).once.times
 
     emit_events([
       {'hostname' => 'localhost', 'response_time' => 102, 'status' => '200'},
