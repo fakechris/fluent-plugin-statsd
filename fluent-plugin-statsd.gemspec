@@ -4,11 +4,11 @@ $:.push File.expand_path('../lib', __FILE__)
 Gem::Specification.new do |gem|
   gem.name        = "fluent-plugin-statsd-output"
   gem.description = "fluentd output filter plugin to send metrics to Esty StatsD"
-  gem.homepage    = "https://github.com/lingochamp/fluent-plugin-statsd"
+  gem.homepage    = "https://github.com/imnotjames/fluent-plugin-statsd"
   gem.summary     = gem.description
   gem.version     = File.read("VERSION").strip
-  gem.authors     = ["Chris Song"]
-  gem.email       = "fakechris@gmail.com"
+  gem.authors     = ["James Ward", "Chris Song"]
+  gem.email       = "james@notjam.es"
   gem.has_rdoc    = false
   gem.files       = `git ls-files`.split("\n")
   gem.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
